@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+    //es5方法
+function unique(a) {  
+    var res = a.filter(function(item, index, array) {  
+    return array.indexOf(item) === index;  
+  });  
+    
+  return res;  
+}  
+
+  console.log(unique([1,1,1,1,3,4,45]))
+  
+var a = [1, 1, '1', '2', 1];  
+var ans = unique(a);  
+console.log(ans); // => [1, "1", "2"]  
+
+    // es6方法
+
+  const arr = (arr) => Array.from(new Set(arr))
+  const test = arr([1,1,1,1,3,4,45])
+  console.log(test)
+</script>
+</html>

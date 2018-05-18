@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象的扩展</title>
+</head>
+<body>
+	
+</body>
+<script>
+	//对象的合并 
+	//属性值一样 会覆盖掉
+	let obj1 = {
+		id: 1,
+		sex: "男"
+	}
+	let obj2 = {
+		name: 'sdfd',
+		ff: "女"
+	}
+	let obj = Object.assign(obj1, obj2);
+	console.log(obj)
+	console.log( Object.keys(obj1));     //遍历key  返回数组
+	console.log( Object.values(obj1));     //遍历值  返回数组
+	console.log( Object.entries(obj1));     //遍历key值  返回2纬数组
+
+	//比较值是否相等
+	//传统  == 判断  无法比较 NaN ==Nan  有缺陷 
+	Object.is('1', '2'); //false
+	Object.is({}, {}); //false
+	Object.is('1', '1') //true
+	Object.is(NaN, NaN) //true
+	Object.is(1, '1') //false
+	//key 值可以是变量
+	const name = 'duuliy'
+	const oo = { [name] : '哈哈'}
+	console.log(oo[name]);
+	//对象中的super
+	const proto = {
+		x:"你好",
+		test(){
+			console.log(this.x);
+		}
+	}
+	const test  = {
+		y:"duuliy",
+		test(){
+			return super.test
+		}
+	}
+	//改变原型
+	Object.setPrototypeOf(test,proto)
+	console.log(test.test());
+	//扩展符
+	const obj = {name:1,age:18,text:"你好"}
+	const {name,...other} = obj
+	console.log(name,other);
+</script>
+</html>
