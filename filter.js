@@ -3,8 +3,8 @@ const arr = [1,2,3,"4"]
 
 //去除非数字的value
 const testArr = arr.filter(value => Object.is(typeof value,"number"))
-
-console.log(testArr);  //[ 1, 2, 3 ]
+ 
+console.log(testArr );  //[ 1, 2, 3 ]
 
 //大于2的value
 const testArr2 = arr.filter(value => value > 2)
