@@ -23,6 +23,22 @@
 	console.log( Object.keys(obj1));     //遍历key  返回数组
 	console.log( Object.values(obj1));     //遍历值  返回数组
 	console.log( Object.entries(obj1));     //遍历key值  返回2纬数组
+	
+	var obj = { foo: "bar", baz: 42 };
+         Object.keys(obj)
+          // ["foo", "baz"]
+
+	
+	var obj = { foo: "bar", baz: 42 };
+            Object.values(obj)
+          // ["bar", 42]
+
+	var obj = { foo: 'bar', baz: 42 };
+          Object.entries(obj)
+          // [ ["foo", "bar"], ["baz", 42] ]
+
+	
+	
 
 	//比较值是否相等
 	//传统  == 判断  无法比较 NaN ==Nan  有缺陷 
