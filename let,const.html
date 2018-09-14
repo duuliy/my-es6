@@ -11,7 +11,9 @@
 <script>
     /* ============================== Let ===========================*/
     //1.
-    //let  和 var 都是声明变量   但是let是块级作用域
+    //let  和 var 都是声明变量   但是let是块级作用域   我认为这种使用一个专门的 { .. } 块的模式是创建块作用域变量的最好方法
+    //另外，应该 总是把 let 声明放在块的最前面。如果有多个变量需要声明的话，建议只用一个 let。
+
     {
         var a = 1;
         let b = 2;
@@ -44,7 +46,7 @@
     console.log(testLet);          //undefined
     var testVar = 1;
     let testLet = 2;
-    //5.暂时性死区
+    //5.暂时性死区   (ReferenceError) 
     var die = 666;         //这里声明个全局变量
     if (true){
         die = 'duuliy';
@@ -78,5 +80,7 @@
     const gg = 'const';       //有点像 php 的
     console.log(gg);     //const
 //    gg = '赵日天';       //报错  无法重新赋值
+   //8.ES6 允许块级作用域的任意嵌套。
+   {{{{{let insane = 'Hello World'}}}}};
 </script>
 </html>
