@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1.默认参数
+        const foo = (x = 11, y = 31) => {
+            console.log(x + y);
+        }
+        foo() //42
+        let a = 5,
+            b = 6;
+        const fun = (x = a + 1, y = b + 1) => {
+            console.log(x + y);
+        }
+        fun() //13
+        //1.解构
+        let {foo,bar} = {foo: "aaa",bar: "bbb"};
+        foo // "aaa"
+        bar // "bbb"
+        //2.
+        let obj = {first: 'hello',last: 'world'};
+        let {first: f,last: l} = obj;
+        f // 'hello'
+        l // 'world'
+        //3.
+        let obj = {
+         p: [
+             'Hello',
+             { y: 'World' }
+         ]
+         };
+
+        let { p: [x, { y }] } = obj;
+        x // "Hello"
+        y // "World"
+        //4.在axios取值时
+
+        // async duuliy(){
+        //     await {data }=axios.get('')
+        // }
+
+        //5.值的交换
+        let x = 1,y = 2;
+        [x, y] = [y, x];
+        //x=1,y=2
+        //6.提取json
+        let jsonData = {
+          id: 42,
+          status: "OK",
+          data: [867, 5309]
+        };
+        let { id, status, data: number } = jsonData;
+
+        console.log(id, status, number);
+        //6.输入模块的指定方法
+        const { SourceMapConsumer, SourceNode } = require("source-map");
+    </script>
+</body>
+
+</html>
