@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
 </head>
+
 <body>
 
 </body>
 <script>
-// yield：
-// yield 关键字用来暂停和继续一个生成器函数。我们可以在需要的时候控制函数的运行。 
-// 　　yield 关键字使生成器函数暂停执行，并返回跟在它后面的表达式的当前值。与return类似，但是可以使用next方法让生成器函数继续执行函数yield后面内容，直到遇到yield暂停或return返回或函数执行结束。
+    // yield：
+    // yield 关键字用来暂停和继续一个生成器函数。我们可以在需要的时候控制函数的运行。 
+    // 　　yield 关键字使生成器函数暂停执行，并返回跟在它后面的表达式的当前值。与return类似，但是可以使用next方法让生成器函数继续执行函数yield后面内容，直到遇到yield暂停或return返回或函数执行结束。
 
-function* ge() {    //声明时需要添加*，普通函数内部不能使用yield关键字，否则会出错
-  yield '1';
-  yield '2';
-  yield '3';
-  return '4';
-}
+    function* ge() { //声明时需要添加*，普通函数内部不能使用yield关键字，否则会出错
+        yield '1';
+        yield '2';
+        yield '3';
+        return '4';
+    }
 
-var a = ge();    //调用函数后不会运行，而是返回指向函数内部状态的指针
-a.next();    // { value: '1', done: false }   遇到yield暂停
-a.next();    // { value: '2', done: false }
-a.next();    // { value: '3', done: false }
-a.next();    // { value: '4', done: true}    函数执行完毕，返回done
-a.next();    // { value: undefined, done: true}  已经执行完毕，返回undefined
+    var a = ge(); //调用函数后不会运行，而是返回指向函数内部状态的指针
+    a.next(); // { value: '1', done: false }   遇到yield暂停
+    a.next(); // { value: '2', done: false }
+    a.next(); // { value: '3', done: false }
+    a.next(); // { value: '4', done: true}    函数执行完毕，返回done
+    a.next(); // { value: undefined, done: true}  已经执行完毕，返回undefined
 
-    function* f(){
+    function* f() {
         yield console.log('nice')
     }
     var F = f();
-    setTimeout( ()=>{
+    setTimeout(() => {
         F.next();
-    },3000)
+    }, 3000)
+    //扩展运算符
+    const go = function* () {
+        yield 1;
+        yield 2;
+        yield 3;
+    };
 
+    [...go()] // [1, 2, 3]
 </script>
+
 </html>

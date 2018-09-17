@@ -1,24 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>扩展运算符</title>
 </head>
+
 <body>
-    
+
 </body>
 <script>
-    const arr = [1,2,3]
+    const arr = [1, 2, 3]
     //拷贝一个数组
     const arr2 = arr.slice()
+    const arr2 = arr.concat();
     //换一种思路
     const arr3 = [...arr]
-    const obj = {a:1,b:2}
+    const obj = {
+        a: 1,
+        b: 2
+    }
     // 对象的合并
-    const obj2 = Object.assign({},obj,{b:3})
+    const obj2 = Object.assign({}, obj, {
+        b: 3
+    })
     //换一种思路
-    const obj3 = {...obj,b:3}
+    const obj3 = { ...obj,
+        b: 3
+    }
+
+    //用于方法
+    function push(array, ...items) {
+        array.push(...items);
+    }
+
+    function add(x, y) {
+        return x + y;
+    }
+
+    const numbers = [4, 38];
+    add(...numbers) // 42
+
+    //合并数组
+    const arr1 = ['a', 'b'];
+    const arr2 = ['c'];
+    const arr3 = ['d', 'e'];
+
+    // ES5 的合并数组
+    arr1.concat(arr2, arr3);
+    // [ 'a', 'b', 'c', 'd', 'e' ]
+
+    // ES6 的合并数组  支持多层关系
+    [...arr1, ...arr2, ...arr3]
 </script>
+
 </html>

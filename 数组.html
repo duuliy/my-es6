@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>数组的拓展</title>
 </head>
+
 <body>
 
 </body>
@@ -21,32 +23,41 @@
     /*---------1. Array.form( obj )   将对象转换为数组 -------------*/
     //ES5中 将对象转换为数组
     let obj = {
-        name : "duuliy",
-        sex :"男",
-        age : 19
+        name: "duuliy",
+        sex: "男",
+        age: 19
     };
-    console.log(obj);    //Object
-    for(var i in obj){
+    console.log(obj); //Object
+    for (var i in obj) {
         console.log(obj[i]);
     }
-    var objToArray = Array.prototype.slice.call( obj );
-    console.log(objToArray);   //Array;
+    var objToArray = Array.prototype.slice.call(obj);
+    console.log(objToArray); //Array;
     //ES6中  将对象转换为数组
-    let objToArray2 = Array.from( obj );
-    console.log( objToArray2 );  //Array
+    let objToArray2 = Array.from(obj);
+    console.log(objToArray2); //Array    此处为空数组   键处无法转换  
+
+    let obj555 = {
+        '0': 'a',
+        '1': 'b',
+        '2': 'c',
+        length: 3 //必带长度
+    };
+    let obj555arr = Array.from(obj555);
+    console.log(obj555arr); //["a", "b", "c"]   
 
 
-    /*---------2. Array.of()   将值转换为数组 --------------*/
+    /*---------2. Array.of()   将一组值，转换为数组。 --------------*/
     //ES5中  声明一个对象  参数个数不同 会导致 行为有差异
     var array = new Array(3);
-    console.log(array);  // [, , ,]  这里是三个下标
-    var array2 = new Array(1,2,3);
-    console.log(array2);     // [1,2,3]
+    console.log(array); // [, , ,]  这里是三个下标
+    var array2 = new Array(1, 2, 3);
+    console.log(array2); // [1,2,3]
     //ES6中进行了统一  总是返回参数数值组成的数组
     let array3 = Array.of();
-    console.log(array3);     //[]
+    console.log(array3); //[]
     let array4 = Array.of(undefined);
-    console.log(array4);      // [undefined]
+    console.log(array4); // [undefined]
     let array5 = Array.of(3)
     console.log(array5); // [3]    这里就不是三个下标了
 
@@ -54,73 +65,109 @@
     /*---------3. copyWithin()  将指定位置的成员复制到其他位置（会覆盖原有成员），然后返回当前数组 --------------*/
     //Array.prototype.copyWithin(target, start = 0, end = this.length)
     //target（必需）：从该位置开始替换数据。
-//    start（可选）：从该位置开始读取数据，默认为0。如果为负值，表示倒数。
-//    end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数
-    var array6 = [1,2,3,4,5];
-    let copyWithin_array6 = array6.copyWithin(0,3); //从下标0 替换数据  从下标3 读取数据   读取 4,5  覆盖掉 1,2
-    console.log(copyWithin_array6);     //所以  [4,5,3,4,5 ]
+    //    start（可选）：从该位置开始读取数据，默认为0。如果为负值，表示倒数。
+    //    end（可选）：到该位置前停止读取数据，默认等于数组长度。如果为负值，表示倒数
+    var array6 = [1, 2, 3, 4, 5];
+    let copyWithin_array6 = array6.copyWithin(0, 3); //从下标0 替换数据  从下标3 读取数据   读取 4,5  覆盖掉 1,2
+    console.log(copyWithin_array6); //所以  [4,5,3,4,5 ]
 
 
     /*----------4.数组实例的find()和findIndex()-----------------------------*/
     //find()  找出第一个符合条件的数组成员  如果没有 返回 undefined    参数是一个回调函数
-    if(true){
-        let array = [1,2,3,4 -1];
+    if (true) {
+        let array = [1, 2, 3, 4 - 1];
         //value 当前的值,  index 当前的位置　arr 原数组
-        let find = array.find(function( value, index, arr ){
-            return value >1 ;
+        let find = array.find(function (value, index, arr) {
+            return value > 1;
         })
         console.log(find); //2
-        let find2 = array.find(function( value, index, arr ){
-            return index > 2 ;
+        let find2 = array.find(function (value, index, arr) {
+            return index > 2;
         })
         console.log(find2); //3
     }
     //findIndex() 和 indexOf()  相似  用来找到第一个符合条件的数组成员的索引
     //他们的区别就是 findIndex 可以识别 NaN
     //ES5中使用 indexOf();
-    if(true){
-        let array6 = [1,2,3];        //块级作用域  取变量名终于不用怕重名了
+    if (true) {
+        let array6 = [1, 2, 3]; //块级作用域  取变量名终于不用怕重名了
         console.log(array6.indexOf(1)); //0
     }
     //ES6使用 findIndex();
-    if(true){
-        let array = [1,2,3,4,5 ];
+    if (true) {
+        let array = [1, 2, 3, 4, 5];
         //参数通 find()
-        let findIndex = array.findIndex(function( value, index, arr ){
-            return value>2;
+        let findIndex = array.findIndex(function (value, index, arr) {
+            return value > 2;
         })
         console.log(findIndex); //下标 2
     }
-    
-    /*--------------6.数组的实例化-------------------*/
-    //ES6提供三个新的方法——entries()，keys()和values()——用于遍历数组。可以用for...of循环进行遍历，
+
+    /*--------------6.数组的实例化取值-------------------*/
+    //ES6提供三个新的方法——entries()，keys()和values()——用于遍历数组返回值。可以用for...of（可以直接遍历字符串）循环进行遍历，
     // 唯一的区别是
     // keys()是对键名的遍历、
     // values()是对键值的遍历，
     // entries()是对键值对的遍历
-    if(true){
-        for(let index of ['a','b'].keys()){
-            console.log(index);          //下标　0,1
+    if (true) {
+        for (let index of ['a', 'b'].keys()) {
+            console.log(index); //下标　0,1
         }
     }
-    if(true){
-        for(let value of ['a','b'].values()){
-            console.log(value);          //键值  a,b
+    if (true) {
+        for (let value of ['a', 'b'].values()) {
+            console.log(value); //键值  a,b
         }
     }
-    if(true){
-        for(let [index,value] of ['a','b'].entries()){
-            console.log(index,value);    //0 'a'  1 'b'
+    if (true) {
+        for (let [index, value] of ['a', 'b'].entries()) {
+            console.log(index, value); //0 'a'  1 'b'
         }
     }
-    const Fn = (a,b,c)=> console.log(a,b,c)
-    const params = [1,2,3]
+    const Fn = (a, b, c) => console.log(a, b, c)
+    const params = [1, 2, 3]
     //Es5
-    Fn.apply(null,params)
+    Fn.apply(null, params)
     //Es6
     Fn(...params)
-    //数组中是否有某个值
-    const isHas = [1,2,3].includes(1)
-    console.log(isHas);
+    /*--------------6.数组的实例化 includes()-------------------*/
+    //数组中是否有某个值  ,返回布尔值
+    const isHas = [1, 2, 3].includes(1)
+    console.log(isHas); //true
+
+    /*--------------6.数组将维，flat()，flatMap()-------------------*/
+    //Array.prototype.flat()用于将嵌套的数组“拉平”，变成一维的数组。该方法返回一个新数组，对原数据没有影响。
+    //flatMap()方法对原数组的每个成员执行一个函数（相当于执行Array.prototype.map()），然后对返回值组成的数组执行flat()方法。该方法返回一个新数组，不改变原数组。只能展开一层数组!!!
+    [1, 2, [3, 4]].flat() // [1, 2, 3, 4]
+    [1, 2, [3, [4, 5]]].flat()
+    // [1, 2, 3, [4, 5]]
+
+    [1, 2, [3, [4, 5]]].flat(2)
+    // [1, 2, 3, 4, 5]
+
+    [1, [2, [3]]].flat(Infinity)   //如果不管有多少层嵌套，都要转成一维数组，可以用Infinity关键字作为参数。
+    // [1, 2, 3]
+
+
+    [1, 2, 3, 4].flatMap(x => [[x * 2]])// [[2], [4], [6], [8]]
+    //flatMap()方法的参数是一个遍历函数，该函数可以接受三个参数，分别是当前数组成员、当前数组成员的位置（从零开始）、原数组。
+
+
+    /*--------------6.数组空位，进阶-------------------*/
+
+    //es5  
+    //forEach(), filter(), reduce(), every() 和some()都会跳过空位。
+    //map()会跳过空位，但会保留这个值
+    //join()和toString()会将空位视为undefined，而undefined和null会被处理成空字符串。
+
+    //es6 
+    // Array.from方法会将数组的空位，转为undefined，也就是说，这个方法不会忽略空位。
+    //扩展运算符（...）也会将空位转为undefined。
+    //copyWithin()会连空位一起拷贝。
+    //for...of循环也会遍历空位。
+    //entries()、keys()、values()、find()和findIndex()会将空位处理成undefined。
+
+    //综上所述  直接用map+es6的方法比较稳妥。。。。。。
 </script>
+
 </html>
