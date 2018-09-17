@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>对象的 扩展</title>
 </head>
+
 <body>
-	
+
 </body>
 <script>
-	//对象的合并 
+	/*--------------1.对象的合并 -------------------*/
 	//属性值一样 会覆盖掉
 	let obj1 = {
 		id: 1,
@@ -18,58 +20,139 @@
 		name: 'sdfd',
 		ff: "女"
 	}
-	let obj = Object.assign(obj1, obj2);  //合并数组
+	let obj = Object.assign(obj1, obj2); //合并数组
 	console.log(obj)
-	console.log( Object.keys(obj1));     //遍历key  返回数组
-	console.log( Object.values(obj1));     //遍历值  返回数组
-	console.log( Object.entries(obj1));     //遍历key值  返回2纬数组
-	
-	var obj = { foo: "bar", baz: 42 };
-         Object.keys(obj)
-          // ["foo", "baz"]
+	console.log(Object.keys(obj1)); //遍历key  返回数组
+	console.log(Object.values(obj1)); //遍历值  返回数组
+	console.log(Object.entries(obj1)); //遍历key值  返回2纬数组
 
-	
-	var obj = { foo: "bar", baz: 42 };
-            Object.values(obj)
-          // ["bar", 42]
+	var obj = {
+		foo: "bar",
+		baz: 42
+	};
+	Object.keys(obj)
+	// ["foo", "baz"]
 
-	var obj = { foo: 'bar', baz: 42 };
-          Object.entries(obj)
-          // [ ["foo", "bar"], ["baz", 42] ]
 
-	
-	
+	var obj = {
+		foo: "bar",
+		baz: 42
+	};
+	Object.values(obj)
+	// ["bar", 42]
 
+	var obj = {
+		foo: 'bar',
+		baz: 42
+	};
+	Object.entries(obj)
+	// [ ["foo", "bar"], ["baz", 42] ]
+
+
+
+	/*--------------2.比较值是否相等 -------------------*/
 	//比较值是否相等
+	//改变原型
+	Object.setPrototypeOf(test, proto)
+	console.log(test.test());
+	//扩展符
+	const obj = {
+		name: 1,
+		age: 18,
+		text: "你好"
+	}
+	const {
+		name,
+		...other
+	} = obj
+	console.log(name, other);
+	/*--------------3.属性名表达式 -------------------*/
+	//key 值可以是变量
+	const name = 'duuliy'
+	const oo = {
+		[name]: '哈哈'
+	}
+	console.log(oo[name]);
+
+	let lastWord = 'last word';
+
+	const a = {
+		'first word': 'hello',
+		[lastWord]: 'world'
+	};
+
+	a['first word'] // "hello"
+	a[lastWord] // "world"
+	a['last word'] // "world"
+	/*--------------4.方法中的name -------------------*/
+	const person = {
+		sayName() {
+			console.log('hello!');
+		},
+	};
+
+	person.sayName.name; // "sayName"
+
+	//如果对象的方法是一个 Symbol 值，那么name属性返回的是这个 Symbol 值的描述。
+
+	const key1 = Symbol('description');
+	const key2 = Symbol();
+	let obj = {
+		[key1]() {},
+		[key2]() {},
+	};
+	obj[key1].name // "[description]"
+	obj[key2].name // ""
+
+
+		/*--------------5.Object.is()  -------------------*/
+		//ES5 比较两个值是否相等，只有两个运算符：相等运算符（==）和严格相等运算符（===）。它们都有缺点，前者会自动转换数据类型，后者的NaN不等于自身，以及+0等于-0。JavaScript 缺乏一种运算，在所有环境中，只要两个值是一样的，它们就应该相等。
+
+		//ES6 提出“Same-value equality”（同值相等）算法，用来解决这个问题。Object.is就是部署这个算法的新方法。它用来比较两个值是否严格相等，与严格比较运算符（===）的行为基本一致。
+		//不同之处只有两个：一是+0不等于-0，二是NaN等于自身。
+	+0 === -0 //true
+	NaN === NaN // false
+
+	Object.is(+0, -0) // false
+	Object.is(NaN, NaN) // true
+
 	//传统  == 判断  无法比较 NaN ==Nan  有缺陷 
 	Object.is('1', '2'); //false
 	Object.is({}, {}); //false
 	Object.is('1', '1') //true
 	Object.is(NaN, NaN) //true
 	Object.is(1, '1') //false
-	//key 值可以是变量
-	const name = 'duuliy'
-	const oo = { [name] : '哈哈'}
-	console.log(oo[name]);
-	//对象中的super
+
+
+	/*--------------5.Object.assign()  -------------------*/
+	//Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。(浅拷贝)
+	const target = { a: 1 };
+    const source1 = { b: 2 };
+    const source2 = { c: 3 };
+
+    Object.assign(target, source1, source2);
+    target // {a:1, b:2, c:3}
+
+	Object.assign([1, 2, 3], [4, 5])   //Object.assign可以用来处理数组，但是会把数组视为对象。
+    // [4, 5, 3]
+	//合并多个对象
+	const merge =(target, ...sources) => Object.assign(target, ...sources);
+
+
+	/*--------------//对象中的super -------------------*/
+	//对象中的super  super关键字表示原型对象时，只能用在对象的方法之中，用在其他地方都会报错。
 	const proto = {
-		x:"你好",
-		test(){
+		x: "你好",
+		test() {
 			console.log(this.x);
 		}
 	}
-	const test  = {
-		y:"duuliy",
-		test(){
+	const test = {
+		y: "duuliy",
+		test() {
 			return super.test
 		}
 	}
-	//改变原型
-	Object.setPrototypeOf(test,proto)
-	console.log(test.test());
-	//扩展符
-	const obj = {name:1,age:18,text:"你好"}
-	const {name,...other} = obj
-	console.log(name,other);
 </script>
+
 </html>
