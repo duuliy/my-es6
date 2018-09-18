@@ -46,7 +46,28 @@
 
     [...go()] // [1, 2, 3]
 
+    //Generator.prototype.throw()    Generator 函数返回的遍历器对象，都有一个throw方法，可以在函数体外抛出错误，然后在 Generator 函数体内捕获。
+
+    //Generator.prototype.return()   Generator 函数返回的遍历器对象，还有一个return方法，可以返回给定的值，并且终结遍历 Generator 函数。
+    function* numbers() {
+        yield 1;
+        try {
+            yield 2;
+            yield 3;
+        } finally {
+            yield 4;
+            yield 5;
+        }
+        yield 6;
+    }
+    var g = numbers();
+    g.next() // { value: 1, done: false }
+    g.next() // { value: 2, done: false }
+    g.return(7) // { value: 4, done: false }
+    g.next() // { value: 5, done: false }
+    g.next() // { value: 7, done: true }
+
     //async await 在使用层面上 可以代替generator函数
-    </script>
+</script>
 
 </html>
