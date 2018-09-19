@@ -102,6 +102,42 @@
        Bar.classMethod() // 'hello'
 
 
+       //静态方法也是可以从super对象上调用的。
+       class Foo {
+         static classMethod() {
+           return 'hello';
+         }
+       }
+
+       class Bar extends Foo {
+         static classMethod() {
+           return super.classMethod() + ', too';
+         }
+       }
+
+       Bar.classMethod() // "hello, too"
+
+       //静态属性指的是 Class 本身的属性，即Class.propName，而不是定义在实例对象（this）上的属性。 目前，只有这种写法可行，因为 ES6 明确规定，Class 内部只有静态方法，没有静态属性。
+       //目前有一个静态属性的提案，对实例属性和静态属性都规定了新的写法。
+
+       //以前，我们定义实例属性，只能写在类的constructor方法里面。
+       class ReactCounter extends React.Component {
+          constructor(props) {   //传递props作为super()的参数，那就是你需要在构造函数内使用this.props
+            super(props);   //绑定this指向
+            this.state = {
+              count: 0
+            };
+          }
+        }
+        //有了新的写法以后，可以不在constructor方法里面定义。
+
+        class ReactCounter extends React.Component {
+          state = {
+            count: 0
+          };
+        }
+
+        
     </script>
 </body>
 
