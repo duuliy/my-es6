@@ -11,7 +11,7 @@
 <body>
     <script>
         /*--------------1.clsaa简介 -------------------*/
-        //定义类  constructor方法，这就是构造方法，而this关键字则代表实例对象
+        //定义类  constructor方法，这就是构造方法，而this关键字则代表实例对象  类必须用new调用!!!    类不存在变量提升（hoist）!!!
         class Point {
             constructor(x, y) {
                 this.x = x;
@@ -23,7 +23,60 @@
             }
         }
 
+        //由于类的方法都定义在prototype对象上面，所以类的新方法可以添加在prototype对象上面。Object.assign方法可以很方便地一次向类添加多个方法。   方法及是对象
+        class Point {
+            constructor() {
+                // ...
+            }
+        }
 
+        Object.assign(Point.prototype, {
+            toString() {},
+            toValue() {}
+        });
+
+        //另外，类的内部所有定义的方法，都是不可枚举的（non-enumerable）。
+        Object.keys(Point.prototype) //[]
+        Object.getOwnPropertyNames(Point.prototype) //// ["constructor","toString"]
+
+        //立即执行 class类
+        let person = new class {
+            constructor(name) {
+                this.name = name;
+            }
+
+            sayName() {
+                console.log(this.name);
+            }
+        }('张三');
+
+        person.sayName(); // "张三"
+
+
+        //class类  的私有属性  私有方法  私有属性也可以设置 getter 和 setter 方法。  #x就是私有属性   目前是提案 慎用
+        //从实例上引用私有属性是不可以的，只能在类的定义中引用。!!!
+        class Foo {
+            # a;
+            #b;
+            #sum() {
+                return# a + #b;
+            }
+            printSum() {
+                console.log(#sum());
+            }
+            constructor(a, b) {
+                #a = a;
+                #b = b;
+            }
+        }
+
+        //在class  中使用this   最后bind(this)  或者  super()   否则 this指向调用他的函数
+
+        //name  get  set   照旧
+
+
+        /*--------------1.2  static静态方法(非常重要 ，单独介绍) -------------------*/
+        
     </script>
 </body>
 
