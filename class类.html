@@ -76,7 +76,32 @@
 
 
         /*--------------1.2  static静态方法(非常重要 ，单独介绍) -------------------*/
-        
+        //类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承(不会被 实例 继承 ，但是可以被 子类 继承!!!)，而是直接通过类来调用，这就称为“静态方法”。
+        class Foo {
+            static classMethod() {
+              return 'hello';
+            }
+          }
+          
+          Foo.classMethod() // 'hello'
+          
+          var foo = new Foo();
+          foo.classMethod()
+          // TypeError: foo.classMethod is not a function
+
+
+       class Foo {
+         static classMethod() {
+           return 'hello';
+         }
+       }
+
+       class Bar extends Foo {
+       }
+
+       Bar.classMethod() // 'hello'
+
+
     </script>
 </body>
 
