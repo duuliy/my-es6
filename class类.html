@@ -74,9 +74,16 @@
 
         //name  get  set   照旧
 
+        //new.target属性，该属性一般用在构造函数之中，返回new命令作用于的那个构造函数。如果构造函数不是通过new命令调用的，new.target会返回undefined，因此这个属性可以用来确定构造函数是怎么调用的。
+        //需要注意的是，子类继承父类时，new.target会返回子类。
+
+
+
 
         /*--------------1.2  static静态方法(非常重要 ，单独介绍) -------------------*/
+
         //类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承(不会被 实例 继承 ，但是可以被 子类 继承!!!)，而是直接通过类来调用，这就称为“静态方法”。
+
         class Foo {
             static classMethod() {
               return 'hello';
@@ -137,7 +144,106 @@
           };
         }
 
-        
+        //在react里面 父调用子的方法  可以用ref ,当然最重要的还是static,因为类的方法不允许直接使用，只能new 类,,,,,但是static把方法A静态化之后，，，直接可以 类.方法A或类[方法]。。。。！！！！！非常重要！！！
+        //而在render中的箭头函数也不需要去绑定this的
+
+
+       /*-----------------------------------------------------------------------2.  继承 ------------------------------------------------------------------------*/
+       //通过extends关键字，继承了Point类的所有属性和方法。
+       class Point {
+       }
+
+       class ColorPoint extends Point {
+       }
+
+
+       //Object.getPrototypeOf方法可以用来从子类上获取父类。  因此，可以使用这个方法判断，一个类是否继承了另一个类。
+       Object.getPrototypeOf(ColorPoint) === Point  // true
+
+       //super这个关键字，既可以当作函数使用，也可以当作对象使用。在这两种情况下，它的用法完全不同。
+       //作为函数时，super()只能用在子类的构造函数之中，用在其他地方就会报错。
+       class A {}
+
+       class B extends A {
+         constructor() {
+           super();
+         }
+       }
+//______________________________
+       class A {}
+
+       class B extends A {
+         m() {
+           super(); // 报错
+         }
+       }
+
+       //这是一个大bug  super()必须在constructor里面才能绑定this...
+       class A {
+         constructor() {
+           this.p = 2;
+         }
+       }
+
+       class B extends A {
+         get m() {
+           return super.p;
+         }
+       }
+
+       let b = new B();
+       b.m // undefined
+
+       //正确的例子
+
+       class a{
+          constructor(name){
+            this.name = name;
+          }
+          sayName(){
+             console.log(`名字:${this.name}`)
+          }
+          sayHi(){
+            console.log("父类的hi方法" )
+          }
+        }
+        class b extends a{
+          constructor(name){
+            super(name)
+          }
+          sayBHi(){
+            super.sayHi();     //调用父级方法
+          }
+        }
+
+        //下面代码中，静态方法B.m里面，super.print指向父类的静态方法。这个方法里面的this指向的是B，而不是B的实例。
+        class A {
+            constructor() {
+           this.x = 1;
+            }
+            static print() {
+          console.log(this.x);
+            }
+        }
+
+        class B extends A {
+            constructor() {
+              super();
+              this.x = 2;
+           }
+            static m() {
+              super.print();
+            }
+        }
+
+        B.x = 3;
+        B.m() // 3
+
+
+        //valueOf() 方法返回 Array 对象的原始值。
+
+
+        //mixin 模式  Mixin 指的是多个对象合成一个新的对象，新对象具有各个组成成员的接口。它的最简单实现如下。
     </script>
 </body>
 
