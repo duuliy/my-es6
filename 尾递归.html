@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*--------------你不知道的js下，重点补充  -------------------*/
+        //通常，在一个函数内部调用另一个函数的时候，会分配第二个栈帧来独立管理第二个函数 调用的变量 / 状态。这个分配不但消耗处理时间，也消耗了额外的内存。
+        //通常调用栈链最多有 10~15 个从一个函数到另一个函数的跳转。这种情况下，内存使用并 不会造成任何实际问题。(指遍历等)
+        //当考虑到递归编程的时候（一个函数重复调用自身）——或者两个或多个函数彼此 调用形成递归——调用栈的深度很容易达到成百上千，甚至更多。
+
+        //有一些称为尾调用（tail call）的函数调用模式，可以以避免额外栈帧分配的方式进行优 化。如果可以避免额外的分配，就没有理由任意限制调用栈深度
+
+    </script>
+</body>
+</html>
