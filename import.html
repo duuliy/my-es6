@@ -20,6 +20,15 @@ var lastName = 'Jackson';
 var year = 1958;
 
 export {firstName, lastName, year};
+
+
+//组合
+// 接口改名
+export { foo as myFoo } from 'my_module';
+
+//浏览器加载 ES6 模块，也使用<script>标签，但是要加入type="module"属性。
+
+/*<script type="module" src="./foo.js"></script>*\
 </script>
 
 </html>
