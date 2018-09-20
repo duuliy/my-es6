@@ -39,6 +39,8 @@
         Reflect.getOwnPropertyDescriptor(target, name)
         Reflect.getPrototypeOf(target)
         Reflect.setPrototypeOf(target, prototype)
+        /*--------------你不知道的js下，特别重点提到  -------------------*/
+       // 修改某些Object方法的返回结果，让其变得更合理。比如，Object.defineProperty(obj, name, desc)在无法定义属性时，会抛出一个错误，而Reflect.defineProperty(obj, name, desc)则会返回false。
     </script>
 </body>
 

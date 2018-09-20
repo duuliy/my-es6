@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //Number.isNaN(..)  //是不是Nan
+        var a = NaN,
+            b = "NaN",
+            c = 42;
+
+        isNaN(a); // true 
+        isNaN( b );                       // true--oops!
+        isNaN( c );                       // false 
+
+        Number.isNaN(a); // true 
+        Number.isNaN( b );                // false--修正了! 
+        Number.isNaN( c );                // false
+
+
+        //Number.isFinite(..)   //非无限的
+
+        
+    </script>
+</body>
+
+</html>
