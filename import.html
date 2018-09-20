@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>exports和import</title>
 </head>
+
 <body>
-	
+
 </body>
 <script type="module">
 	// 谷歌浏览器61 新增原生支持  不需要 babel
 	import {sayName} from "./module.js"
 	sayName('你好!')
+	//公开
+	// profile.js
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+
+export {firstName, lastName, year};
 </script>
+
 </html>
