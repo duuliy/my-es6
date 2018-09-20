@@ -51,9 +51,9 @@
 
 
 	/*--------------2.比较值是否相等 -------------------*/
-	//比较值是否相等
+	//
 	//改变原型
-	Object.setPrototypeOf(test, proto)
+	Object.setPrototypeOf(test, proto)  //把proto的方法委托给test
 	console.log(test.test());
 	//扩展符
 	const obj = {
@@ -153,6 +153,14 @@
 			return super.test
 		}
 	}
+
+	
+    /*--------------你不知道的js(下) 补充------------------*/
+	//getOwnPropertySymbols(..)，它直接从对象上取得所有的符号属性：
+	var o = {     foo: 42,     [ Symbol( "bar" ) ]: "hello world",     baz: true  }; 
+ 
+    Object.getOwnPropertySymbols( o );  // [ Symbol(bar) ]
+
 </script>
 
 </html>
