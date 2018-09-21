@@ -9,7 +9,7 @@
 <body>
 
 </body>
-<script type="module">
+<script>
 	// 谷歌浏览器61 新增原生支持  不需要 babel
 	import {sayName} from "./module.js"
 	sayName('你好!')
@@ -26,9 +26,9 @@ export {firstName, lastName, year};
 // 接口改名
 export { foo as myFoo } from 'my_module';
 
+ /*--------------你不知道的js下，重点补充  -------------------*/
 //浏览器加载 ES6 模块，也使用<script>标签，但是要加入type="module"属性。
-
-/*<script type="module" src="./foo.js"></script>*\
+/*<script type="module" src="./foo.js">*/
 </script>
 
 </html>
