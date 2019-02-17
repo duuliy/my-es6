@@ -1,7 +1,7 @@
 /**
  * @name 倍发科技-程序面试
  * @description 2018/3/10
- * @author Jinke.Li (1359518268@qq.com)
+ * @author Jinke.Li 
  */
 
 const checkerboard1 = [
