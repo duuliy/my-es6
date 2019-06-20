@@ -4,11 +4,21 @@
 //map:
 //fn 函数,context 上下文
 const thatMap=function (fn,context) {
-    let arr=Array.prototype.splice.call(this)
+    let arr=Array.prototype.slice.call(this)
     let mapedArr=[]
     for(let i=0 ;i<arr.length; i++){
-        if(!arr.hasOwnproperty(i)) continue
+        if(!arr.hasOwnProperty(i)) continue
         mapedArr.push(fn.call(context,arr[i],i,this))
+    }
+    return mapedArr
+  }
+
+Array.prototype.thatMap=function (fn,ctx) {
+    let oriArr=Array.prototype.slice.call(this)
+    let mapedArr=[]
+    for(let i=0 ;i<oriArr.length; i++){
+        if(!oriArr.hasOwnProperty(i)) continue
+        mapedArr.push(fn.call(ctx,oriArr[i],i,this))
     }
     return mapedArr
   }
@@ -17,10 +27,10 @@ const thatMap=function (fn,context) {
   //filter
 
 const thatFilter=function (fn,context) {
-    let arr=Array.prototype.splice.call(this)
+    let arr=Array.prototype.slice.call(this)
     let mapedArr=[]
     for(let i=0 ;i<arr.length; i++){
-        if(!arr.hasOwnproperty(i)) continue
+        if(!arr.hasOwnProperty(i)) continue
         fn.call(context,arr[i],i,this) && mapedArr.push(arr[i])
     }
     return mapedArr
@@ -38,11 +48,11 @@ const thatFilter=function (fn,context) {
   //some   
 
   const thatSome=function (fn,context) {
-    let arr=Array.prototype.splice.call(this)
+    let arr=Array.prototype.slice.call(this)
     if(!arr.length) return false
     let flag=false
     for(let i=0 ;i<arr.length; i++){
-        if(!arr.hasOwnproperty(i)) continue
+        if(!arr.hasOwnProperty(i)) continue
         let res =fn.call(context,arr[i],i,this)
         if(res){
             flag=true
