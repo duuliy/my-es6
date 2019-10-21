@@ -9,6 +9,31 @@
 <body>
     <script>
         //Proxy 对象可以拦截目标对象的任意属性，这使得它很合适用来写 Web 服务的客户端。
+        const Car = {
+            maker: 'BMW',
+            year: 2018,
+        }
+
+        const proxyCar = new Proxy(Car, {
+            set(obj, prop, value) {
+                if (prop === 'maker' && value.length < 1) {
+                    throw new Error('Invalid maker');
+                }
+                if (prop === 'year' && typeof value !== 'number') {
+                    throw new Error('Invalid year');
+                }
+
+                obj[prop] = value
+
+                return true
+            }
+        });
+
+        proxyCar.maker = ''
+        // throw exception
+
+        proxyCar.year = '1999'
+        // throw exception
     </script>
 </body>
 </html>
