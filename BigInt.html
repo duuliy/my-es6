@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // bigint  新类型
+        //只能做整数 任意精度整数 金融
+
+        typeof 123n
+        //bigint
+
+        const max = BigInt(Number.MAX_SAFE_INTEGER) + 2n
+        // 9_007_199_254_740_993n  ✅
+
+        1234567890123456789 * 123
+        // -> 151851850485185200000 ❌
+
+        1234567890123456789n * 123n
+        // -> 151851850485185185047n  ✅
+
+        4n === BigInt(4)
+        // => true
+
+        4n == 4;
+        // => true
+
+        4n === 4;
+        // => false
+
+        if (0n) {
+            console.log('if');
+        } else {
+            console.log('else');
+        }
+        // 输出：'else', 因为0n是假值
+
+        0n || 12n
+        // -> 12n
+
+        0n && 12n
+        // -> 0n
+
+        Boolean(0n)
+        // -> false
+
+        Boolean(12n)
+        // -> true
+
+        !12n
+        // -> false
+
+        !0n
+        // -> true
+
+        // BigInt支持那些常见的运算符例如：+,-,,/ * %，包括一些按位运算符如|,
+        //  & , <<, >> ^ ，它和Number类型值的表现一致
+
+
+        // BigInt.asIntN(width, value) BigInt.asUintN(width, value),通过这两个库函数，可以将BigInt值包装为有符号或无符号整数，并限制在特定位数。
+        BigInt.asIntN(64, max)
+        // -> 9_223_372_036_854_775_807n
+
+
+        BigInt.asIntN(64, max + 1n);
+        // -> -9_223_372_036_854_775_808n
+
+        //    ^ 变为负值 因为溢出了
+        // 一旦传给超过64位整数范围(即63位的绝对数值+1位符号位)的BigInt值，就会发生溢出。
+
+        BigInt.asUintN(64, max);
+        // -> 9_223_372_036_854_775_807n
+
+        BigInt.asUintN(64, max + 1n)
+        // -> 9_223_372_036_854_775_808n
+
+        //BigUint64Array则确保其值保持在无符号位的64位限制范围内
+        const view = new BigInt64Array(4);
+        // -> [0n,0n,0n,0n]
+
+        view.length
+
+        // -> 4
+
+        view[0];
+
+        // -> 0n
+
+        view[0] =40n
+
+        view[0];
+        // -> 40n
+
+        // 到目前为止已经实现BigInt的有Chrome(67+)，Firefox(68+)，Opear(54+)，Node(10.4.0+),其中Safari正在实现中
+
+
+    </script>
+</body>
+
+</html>
